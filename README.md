@@ -16,20 +16,20 @@ Score: 5
 
 ## `Game` interface:
 
-### ```__init__(grid_wh: tuple, ups: int)```
+### ```__init__(self, grid_wh: tuple, ups: int)```
 
 - ### `grid_wh`: grid width height tuple 
 - ### `ups`: UPDATES_PER_SECOND 
 
-### ```update_game```: 
+### ```update_game(self)```: 
 
 - ### executed at every time step. Time steps are determined by the `ups`. Should contain all game time dependent behaviour. 
 
-### ```update_grid```:
+### ```update_grid(self)```:
 - ### executed at every time stemp. Time steps are determined by `ups`. Modifies `GameGrid` 
 
 
-### ```on_key_press```: 
+### ```on_key_press(self)```: 
 - ### key pressed event kind of *callback*
 
 
