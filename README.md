@@ -16,10 +16,10 @@ Score: 5
 
 ## `Game` interface:
 
-### ```__init__(self, grid_wh: tuple, ups: int)```
+#### ```__init__(self, grid_wh: tuple, ups: int)```
 
-- ### `grid_wh`: grid width height tuple 
-- ### `ups`: UPDATES_PER_SECOND 
+- #### `grid_wh`: grid width height tuple 
+- #### `ups`: UPDATES_PER_SECOND 
 
 #### ```update_game(self)```: 
 
