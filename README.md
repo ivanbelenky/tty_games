@@ -12,7 +12,7 @@ Score: 5
     🐭
                                  
 ```
-# `python tty game`   *`engine?`*
+# python tty game *engine?*
 
 ## `Game` interface:
 
