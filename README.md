@@ -21,16 +21,16 @@ Score: 5
 - ### `grid_wh`: grid width height tuple 
 - ### `ups`: UPDATES_PER_SECOND 
 
-### ```update_game(self)```: 
+#### ```update_game(self)```: 
 
-- ### executed at every time step. Time steps are determined by the `ups`. Should contain all game time dependent behaviour. 
+- #### executed at every time step. Time steps are determined by the `ups`. Should contain all game time dependent behaviour. 
 
-### ```update_grid(self)```:
-- ### executed at every time stemp. Time steps are determined by `ups`. Modifies `GameGrid` 
+#### ```update_grid(self)```:
+- #### executed at every time stemp. Time steps are determined by `ups`. Modifies `GameGrid` 
 
 
-### ```on_key_press(self)```: 
-- ### key pressed event kind of *callback*
+#### ```on_key_press(self)```: 
+- #### key pressed event kind of *callback*
 
 
 
