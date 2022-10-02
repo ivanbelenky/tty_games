@@ -15,7 +15,6 @@ Score: 5
 # `python tty game`   *`engine?`*
 
 ## `Game` interface:
-<br>
 
 ### ```__init__(grid_wh: tuple, ups: int)```
 
