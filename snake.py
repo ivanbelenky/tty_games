@@ -260,4 +260,5 @@ class Snake(TrainableGame):
 
 if __name__ == "__main__":
     pysnake = Snake((25, 25), 3, 3, 2, walls=False, ups=25)
+    pysnake.train()
     pysnake.watch_agent_play()
