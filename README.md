@@ -93,6 +93,11 @@ def on_key_press(self, key):
 ```
 
 ## Snake Agent
+```python
+pysnake = Snake((25, 25), 3, 3, 2, walls=False, ups=25)
+pysnake.train()
+pysnake.watch_agent_play()
+```
 
  ![snakerini](https://github.com/ivanbelenky/tty_games/blob/main/static/snake_agent.gif)
 
