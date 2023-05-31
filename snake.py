@@ -254,5 +254,5 @@ class Snake(TrainableGame):
 
 if __name__ == "__main__":
     pysnake = Snake((25, 25), 3, 3, 2, walls=False, ups=15)
-    pysnake.train(model_filename='neg_reward.pth', watch_training=False, plot=True)
+    pysnake.watch_agent_play(model_path='model/neg_reward.pth', watching_speed=50)
     

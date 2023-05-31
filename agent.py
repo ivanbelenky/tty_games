@@ -11,7 +11,7 @@ plt.style.use("dark_background")
 
 MAX_MEMORY = 100_000
 BATCH_SIZE = 1000
-LR = 0.001
+LR = 0.0001
 GAMMA = 0.9
 EPS = 0.05
 MAX_EPS_GAMES = 1000
@@ -20,7 +20,7 @@ class GameAgent:
     def __init__(
         self, 
         game,
-        hidden_size=256,
+        hidden_size=128,
         eps=EPS, 
         gamma=GAMMA, 
         lr=LR, 
@@ -61,7 +61,6 @@ class GameAgent:
 
     def get_action(self, state):
         final_move = [0]*self.game.action_size
-
         if random.random() < self.eps*(self.max_eps_games-self.n_games)/self.max_eps_games:
             final_move = random.choice(self.game.action_space)
         else:
