@@ -1,6 +1,7 @@
 from game import TrainableGame
 import numpy as np
 
+
 class Snake(TrainableGame):
     DIRECTION_MAP = {
         'a': 'left',
@@ -62,16 +63,15 @@ class Snake(TrainableGame):
         self.initial_length = initial_length
         self.initialize_body(self.x0, self.y0, self.initial_length)
 
-
         self.eating = []
         self.to_eat = []
         if special:
             self.to_eat_special = []
         self.score = 0
         self.PLAY_CONDITION = True
-
+        
         self.state_size = self.get_state().shape[0]
-
+        
     def initialize_body(self, x0, y0, initial_length):
         self.body = [(x, y0) for x in [x0-i % self.grid.width for i in range(initial_length)]][::-1]
  
@@ -242,17 +242,17 @@ class Snake(TrainableGame):
             game_over = True
             return reward, game_over, self.score
         elif score_after > score_before:
-            reward = 10
+            reward = 30
             game_over = False
             return reward, game_over, self.score
         
-        return -0.05, False, self.score
+        return -0.01, False, self.score
         
     def map_action(self, action):
         return self.MAPPING.get((self.direction, tuple(action)), None)
 
 
 if __name__ == "__main__":
-    pysnake = Snake((25, 25), 3, 3, 2, walls=False, ups=15)
+    pysnake = Snake((25, 25), 3, 3, 2, walls=True, ups=15)
     pysnake.train(model_filename='neg_reward.pth', watch_training=False, plot=True)
     

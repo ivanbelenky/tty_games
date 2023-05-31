@@ -9,18 +9,17 @@ from model import DQN, DQNTrainer
 
 plt.style.use("dark_background")
 
-MAX_MEMORY = 100_000
-BATCH_SIZE = 1000
-LR = 0.001
-GAMMA = 0.9
-EPS = 0.05
+MAX_MEMORY = 10_000
+BATCH_SIZE = 500
+LR = 0.003
+GAMMA = 0.95
+EPS = 0.03
 MAX_EPS_GAMES = 1000
 
 class GameAgent:
     def __init__(
         self, 
         game,
-        hidden_size=256,
         eps=EPS, 
         gamma=GAMMA, 
         lr=LR, 
@@ -31,10 +30,10 @@ class GameAgent:
         self.game = game
         self.n_games = 0
         self.memory = deque(maxlen=MAX_MEMORY)
-
-        self.model = DQN(self.game.state_size, hidden_size, self.game.action_size)
-        self.trainer = DQNTrainer(self.model, lr, gamma)
         
+        self.model = DQN(self.game.state_size, self.game.action_size)
+        self.trainer = DQNTrainer(self.model, lr, gamma)
+
         self.eps = eps
         self.max_memory = max_memory
         self.batch_size = batch_size

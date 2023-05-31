@@ -23,8 +23,6 @@ class Getch:
 getch = Getch()
 
 
-
-
 plt.ion()
 
 def plot_progress(scores, mean_scores):

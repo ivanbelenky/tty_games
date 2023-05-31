@@ -5,16 +5,17 @@ import torch.optim as optim
 import torch.nn.functional as F
 
 class DQN(nn.Module):
-    def __init__(self, input_size, hidden_size, output_size):
+    def __init__(self, input_size, output_size):
         super().__init__()
-        self.fc1 = nn.Linear(input_size, hidden_size)
-        self.fc3 = nn.Linear(hidden_size, output_size)
+        self.layer = nn.Sequential(
+            nn.Linear(input_size, 256),
+            nn.ReLU(),
+            nn.Linear(256, output_size),
+        )
 
     def forward(self, x):
-        x = F.relu(self.fc1(x))
-        x = self.fc3(x)
-        return x
-    
+        return self.layer(x)
+
     def save(self, file_name='model.pth'):
         model_folder = './model'
         if not os.path.exists(model_folder):
@@ -53,6 +54,7 @@ class DQNTrainer:
             
         pred = self.model(states)
         target = pred.clone()
+
         for idx in range(len(game_overs)):
             Q_new = rewards[idx]
             if not game_overs[idx]:
