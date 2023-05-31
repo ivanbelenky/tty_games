@@ -5,11 +5,10 @@ import tty
 import sys
 import select
 import time
-from typing import Dict, List, Tuple
 from abc import ABC, abstractmethod
+from typing import Dict, List, Tuple, Any
 
 from agent import GameAgent
-
 from utils import getch, plot_progress
 
 
@@ -71,9 +70,10 @@ class Game(ABC):
         await asyncio.gather(*tasks)
 
     def __call__(self) -> None:
-        loop = asyncio.get_event_loop()
+        loop = asyncio.new_event_loop()
         loop.run_until_complete(self.main_loop())
         loop.close()
+        
 
 
 class TrainableGame(Game):
@@ -118,7 +118,7 @@ class TrainableGame(Game):
         max_games: int = 10_000,
         max_steps: int = None, 
         model_filename: str = 'model.pth',
-        train_params: Dict[str,str] = {} 
+        train_params: Dict[str, Any] = {} 
         ) -> None:
 
         game = self
@@ -199,7 +199,7 @@ class TrainableGame(Game):
             action = agent.get_action(old_state)
             game.grid.print(game)
             time.sleep(sleep_time)
-            reward, game_over, score = game.play_step(action)
+            _, game_over, _ = game.play_step(action)
             if game_over: 
                 if not forever and game_counter < max_games:
                     break

@@ -4,9 +4,10 @@ from collections import deque
 
 import torch 
 import matplotlib.pyplot as plt
-import numpy as np
 
 from model import DQN, DQNTrainer
+
+plt.style.use("dark_background")
 
 MAX_MEMORY = 100_000
 BATCH_SIZE = 1000
@@ -74,4 +75,3 @@ class GameAgent:
 
     def load(self, path):
         self.model.load_state_dict(torch.load(path))
-

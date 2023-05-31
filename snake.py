@@ -1,4 +1,4 @@
-from game import Game, TrainableGame
+from game import TrainableGame
 import numpy as np
 
 class Snake(TrainableGame):
@@ -35,6 +35,19 @@ class Snake(TrainableGame):
         'up' : '^',
         'down': 'v'
     }
+
+    MAPPING = {
+            ('up', (1, 0, 0)): 'a',
+            ('down', (1, 0, 0)): 'd',
+            ('left', (1, 0, 0)): 's',
+            ('right', (1, 0, 0)): 'w',
+            ('up', (0, 1, 0)): 'd',
+            ('down', (0, 1, 0)): 'a',
+            ('left', (0, 1, 0)): 'w',
+            ('right', (0, 1, 0)): 's',
+            ('', (0, 0, 1)): 'none'
+        }
+        
     
     def __init__(self, grid_wh, x0, y0, initial_length=3, ups=10, special=False, walls=True):
         super().__init__(grid_wh, ups)
@@ -233,32 +246,13 @@ class Snake(TrainableGame):
             game_over = False
             return reward, game_over, self.score
         
-        return 0, False, self.score
-
+        return -0.05, False, self.score
+        
     def map_action(self, action):
-        if action == [1, 0, 0] and self.direction == 'up':
-            return 'a'
-        if action == [1, 0, 0] and self.direction == 'down':
-            return 'd'
-        if action == [1, 0, 0] and self.direction == 'left':
-            return 's'
-        if action == [1, 0, 0] and self.direction == 'right':
-            return 'w'
-        
-        if action == [0, 1, 0] and self.direction == 'up':
-            return 'd'
-        if action == [0, 1, 0] and self.direction == 'down':
-            return 'a'
-        if action == [0, 1, 0] and self.direction == 'left':
-            return 'w'
-        if action == [0, 1, 0] and self.direction == 'right':
-            return 's'
-        
-        if action == [0, 0, 1]:
-            return 'none'
-        
+        return self.MAPPING.get((self.direction, tuple(action)), None)
+
 
 if __name__ == "__main__":
-    pysnake = Snake((25, 25), 3, 3, 2, walls=False, ups=25)
-    pysnake.train()
-    pysnake.watch_agent_play()
+    pysnake = Snake((25, 25), 3, 3, 2, walls=False, ups=15)
+    pysnake.train(model_filename='neg_reward.pth', watch_training=False, plot=True)
+    
