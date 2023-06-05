@@ -163,7 +163,7 @@ class TrainableGame(Game):
 
                 if score > record:
                     record = score
-                    agent.model.save(model_filename)
+                    #agent.model.save(model_filename)
 
                 scores.append(score)
                 total_score += score

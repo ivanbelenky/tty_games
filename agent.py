@@ -11,7 +11,7 @@ plt.style.use("dark_background")
 
 MAX_MEMORY = 100_000
 BATCH_SIZE = 1000
-LR = 0.0001
+LR = 0.001
 GAMMA = 0.9
 EPS = 0.05
 MAX_EPS_GAMES = 1000
@@ -20,7 +20,7 @@ class GameAgent:
     def __init__(
         self, 
         game,
-        hidden_size=128,
+        hidden_size=256,
         eps=EPS, 
         gamma=GAMMA, 
         lr=LR, 

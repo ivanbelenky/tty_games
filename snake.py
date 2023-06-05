@@ -201,7 +201,13 @@ class Snake(TrainableGame):
         danger_down = (head_x, (head_y + 1) % self.grid.height) in self.body
         danger_left = ((head_x - 1) % self.grid.width, head_y) in self.body
         danger_right = ((head_x + 1) % self.grid.width, head_y) in self.body
+        danger_up_2 = (head_x, (head_y - 2) % self.grid.height) in self.body
+        danger_down_2 = (head_x, (head_y + 2) % self.grid.height) in self.body
+        danger_left_2 = ((head_x - 2) % self.grid.width, head_y) in self.body
+        danger_right_2 = ((head_x + 2) % self.grid.width, head_y) in self.body
         
+
+
         state = [
             dir_u,
             dir_d,
@@ -214,7 +220,11 @@ class Snake(TrainableGame):
             danger_up,
             danger_down,
             danger_left,
-            danger_right
+            danger_right,
+            danger_up_2,
+            danger_down_2,
+            danger_left_2,
+            danger_right_2
         ]
 
         return np.array(state, dtype=int)
@@ -253,6 +263,7 @@ class Snake(TrainableGame):
 
 
 if __name__ == "__main__":
-    pysnake = Snake((25, 25), 3, 3, 2, walls=False, ups=15)
-    pysnake.watch_agent_play(model_path='model/neg_reward.pth', watching_speed=50)
+    pysnake = Snake((20, 20), 3, 3, 2, walls=True, ups=15)
+    pysnake.train(watch_training=False, watching_speed=50, model_filename=None, plot=True)
+    #pysnake.watch_agent_play(model_path='model/neg_reward.pth', watching_speed=50)
     

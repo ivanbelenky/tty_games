@@ -50,13 +50,13 @@ class DQNTrainer:
             next_states = torch.stack([torch.tensor(n_state, dtype=torch.float) for n_state in next_states])
             actions = torch.stack([torch.tensor(action, dtype=torch.long) for action in actions])
             rewards = torch.stack([torch.tensor(reward, dtype=torch.float) for reward in rewards])
-            
-        pred = self.model(states)
-        target = pred.clone()
-        for idx in range(len(game_overs)):
+                                                #   a0, a1, a2, ..., an
+        pred = self.model(states) # self.model(s) = [ ,   ,   , ...,  ]
+        target = pred.clone() # target = prediction = model(s)
+        for idx in range(len(game_overs)): #game overs es un array de si el juego termino en esa combinacion de estados, acciones, etc
             Q_new = rewards[idx]
             if not game_overs[idx]:
-                Q_new = rewards[idx] + self.gamma * torch.max(self.model(next_states[idx]))
+                Q_new = rewards[idx] + self.gamma * torch.max(self.model(next_states[idx])) # update de q learning, R_t+1 + gamma*max(q(s_t+1,a))
             target[idx][torch.argmax(actions[idx]).item()] = Q_new
 
         self.optimizer.zero_grad()
